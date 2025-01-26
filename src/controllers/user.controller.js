@@ -1,16 +1,25 @@
 const { registerUser } = require('../services/createUser');
+const { checkDados } = require('../validations/attributes');
 
 module.exports = {
   async Create(req, res) {
    try {
     const {
+      nome,
+      telefone,
+      email,
       user,
       password,
     } = req.body;
 
-    const result = await registerUser(user, password);
+    const dadosCheck = checkDados(nome, email, telefone);
 
-    return res.status(201).send(result);
+    if(dadosCheck.status) {
+      const result = await registerUser(nome, telefone, email, user, password);
+      return res.status(201).send(result);
+    } else {
+      res.status(400).send({ message: dadosCheck.message });
+    }    
    } catch (error) {
     console.log(error);
     return res.status(500).send({
