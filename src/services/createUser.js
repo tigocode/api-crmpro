@@ -1,11 +1,11 @@
 const connection = require('../connection/connection');
 const crypto = require('crypto');
-const { GerarToken } = require('./token');
+const { GeneratorToken } = require('./token');
 
 const registerUser = async (nome, telefone, email, user, password) => {
   const JWT_SECRET = crypto.createHash('md5').update(password).digest('hex');
   password = JWT_SECRET;
-  const token = GerarToken(user, JWT_SECRET);
+  const token = GeneratorToken(user, JWT_SECRET);
 
   const createUser = await connection('users').insert({
     nome,
