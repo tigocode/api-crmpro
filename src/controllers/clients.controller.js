@@ -1,4 +1,4 @@
-const { resgisterClient } = require('../services/createClient');
+const { registerClient } = require('../services/createClient');
 const { checkDados } = require('../validations/attributes');
 
 module.exports = {
@@ -14,7 +14,7 @@ module.exports = {
 
       const dadosCheck = checkDados(nome, email, telefone);
       if(dadosCheck.status) {
-        const resultInsert = await resgisterClient(
+        const resultInsert = await registerClient(
           nome,
           sexo,
           email,
