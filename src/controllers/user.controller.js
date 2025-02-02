@@ -15,8 +15,14 @@ module.exports = {
     const dadosCheck = checkDados(nome, email, telefone);
 
     if(dadosCheck.status) {
-      const result = await registerUser(nome, telefone, email, user, password);
-      return res.status(201).send(result);
+      const resultInsert = await registerUser(
+        nome,
+        telefone,
+        email,
+        user,
+        password
+      );
+      return res.status(201).send(resultInsert);
     } else {
       res.status(400).send({ message: dadosCheck.message });
     }    

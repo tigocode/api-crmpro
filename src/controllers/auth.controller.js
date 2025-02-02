@@ -1,4 +1,4 @@
-const { searchUser } = require('../services/selectUser');
+const { searchUser } = require('../services/selectToken');
 
 module.exports = {
   async Create(req, res) {
