@@ -11,8 +11,8 @@ exports.up = function(knex) {
     table.timestamp('data_compra').defaultTo(knex.fn.now())
     table.timestamp('data_recompra').notNullable();
 
-    table.integer('id_user').unsigned().notNullable();
-    table.foreign('id_user').references('id').inTable('users').onDelete('CASCADE');
+    table.integer('id_client').unsigned().notNullable();
+    table.foreign('id_client').references('id').inTable('clients').onDelete('CASCADE');
   });
 };
 

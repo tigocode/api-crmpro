@@ -10,7 +10,7 @@ module.exports = {
     },
     useNullAsDefault: true,
     migrations: {
-      directory: 'src/controllers/migrations',
+      directory: 'src/connection/migrations',
     }
   }
 }
