@@ -1,11 +1,11 @@
-const ValidationLogin =  (user, password) => {
-  if(user === '' && password === '') {
-    return true;
-  } else {
-    return false;
-  }
+const crypto = require('crypto');
+
+const createHash =  (password) => {
+  const JWT_SECRET = crypto.createHash('md5').update(password).digest('hex');
+
+  return JWT_SECRET;
 }
 
 module.exports = {
-  ValidationLogin,
+  createHash,
 }

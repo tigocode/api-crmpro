@@ -1,12 +1,15 @@
 const { CheckToken } = require('../services/token');
+const { createHash } = require('../validations/auth');
 
 module.exports = {
   async Index(req, res) {
     let { user, password, token } = req.body;
-    const tokenChecked = CheckToken(token, password, user);
+
+    const JWT_SECRET = createHash(password);
+    const tokenChecked = CheckToken(token, JWT_SECRET, user);
 
     if(!tokenChecked.status) {
-      res.status(tokenChecked.status).send();
+      res.status(tokenChecked.code).send({'access': tokenChecked.status});
       return;
     }
 
