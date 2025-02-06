@@ -10,8 +10,8 @@ const CheckToken = (token, JWT_SECRET, user) => {
   let status;
   let code;
 
-  jwt.verify(token, JWT_SECRET, function(err, dateToken) {
-    if(err == null && dateToken.user == user) {
+  jwt.verify(token, JWT_SECRET, function(error, dateToken) {
+    if(error == null && dateToken.user == user) {
       status = true;
       code = 200;
     } else {
