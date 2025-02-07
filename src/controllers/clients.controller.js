@@ -1,5 +1,6 @@
 const { registerClient } = require('../services/createClient');
 const { checkDados } = require('../validations/attributes');
+const { UserAlreadyExist } = require('../validations/userAlreadyExist');
 
 module.exports = {
   async Create(req, res) {
@@ -13,7 +14,9 @@ module.exports = {
       } = req.body;
 
       const dadosCheck = checkDados(nome, email, telefone);
-      if(dadosCheck.status) {
+      const idChecked = await UserAlreadyExist(id_user);
+
+      if(dadosCheck.status && idChecked.status) {
         const resultInsert = await registerClient(
           nome,
           sexo,
@@ -21,7 +24,7 @@ module.exports = {
           telefone,
           id_user
         );
-        return res.status(201).send(resultInsert);
+        return res.status(201).json({resultInsert});
       } else {
         res.status(400).send({ message: dadosCheck.message });
       }
