@@ -7,7 +7,7 @@ exports.up = function(knex) {
     table.increments('id').primary();
     table.string('modelo').notNullable();
     table.string('fabricante').notNullable();
-    table.string('tipo').notNullable();
+    table.string('categoria').notNullable();
     table.decimal('valor_unitario').notNullable();
     table.decimal('valor_revenda').notNullable();
     table.timestamp('createdAt').defaultTo(knex.fn.now())

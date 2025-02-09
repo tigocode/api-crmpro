@@ -7,7 +7,7 @@ module.exports = {
       const {
         modelo,
         fabricante,
-        tipo,
+        categoria,
         valor_unitario,
         valor_revenda,
         id_user
@@ -19,7 +19,7 @@ module.exports = {
         const resultInseet = await registerProduct(
           modelo,
           fabricante,
-          tipo,
+          categoria,
           valor_unitario,
           valor_revenda,
           id_user

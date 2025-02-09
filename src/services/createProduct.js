@@ -1,10 +1,10 @@
 const connection =  require('../connection/connection');
 
-const registerProduct = async (modelo, fabricante, tipo, valor_unitario, valor_revenda, id_user) => {
+const registerProduct = async (modelo, fabricante, categoria, valor_unitario, valor_revenda, id_user) => {
   const createProduct = await connection('products').insert({
     modelo,
     fabricante,
-    tipo,
+    categoria,
     valor_unitario,
     valor_revenda,
     id_user

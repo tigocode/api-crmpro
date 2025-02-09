@@ -5,9 +5,9 @@
 exports.up = function(knex) {
   return knex.schema.createTable('discard_type', function(table) {
     table.increments('id').primary();
-    table.string('tipo').notNullable();
+    table.string('categoria').notNullable();
     table.integer('tempo_descarte').notNullable();
-    table.timestamp('createdAt').defaultTo(knex.fn.now())
+    table.timestamp('createdAt').defaultTo(knex.fn.now());
   });
 };
 

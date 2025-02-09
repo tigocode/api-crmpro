@@ -7,7 +7,7 @@ exports.up = function(knex) {
     table.increments('id').primary();
     table.string('olho').notNullable();
     table.decimal('esferico').notNullable();
-    table.decimal('cilindro').notNullable();
+    table.decimal('cilindrico').notNullable();
     table.decimal('eixo').notNullable();
     table.decimal('adicao').notNullable();
     table.timestamp('createdAt').defaultTo(knex.fn.now())
