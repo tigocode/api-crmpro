@@ -1,14 +1,16 @@
 const connection = require('../connection/connection');
 
-const createRegister = async (produto, categoria, id_client, id_user) => {
-  const [id] = await connection('products').insert({
+const createRegister = async (produto, categoria, quantidade, data_recompra, id_client, id_user) => {
+  const id = await connection('register').insert({
     produto,
     categoria,
+    quantidade,
+    data_recompra,
     id_client,
-    id_user,
+    id_user
   });
 
-  return { id };
+  return  id;
 }
 
 module.exports = {

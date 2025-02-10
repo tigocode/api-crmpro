@@ -13,6 +13,8 @@ exports.up = function(knex) {
 
     table.integer('id_client').unsigned().notNullable();
     table.foreign('id_client').references('id').inTable('clients').onDelete('CASCADE');
+    table.integer('id_user').unsigned().notNullable();
+    table.foreign('id_user').references('id').inTable('users').onDelete('CASCADE');
   });
 };
 

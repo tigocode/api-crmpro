@@ -1,9 +1,10 @@
 const connection = require('../connection/connection');
 
-const filterTimeDisposal = async (categoria) => {
+const CategoryFilter = async (categoria) => {
   const tempoDescarte = await connection('discard_type')
     .where('categoria', categoria)
     .select([
+      'discard_type.quantidade_lente_caixa',
       'discard_type.tempo_descarte'
     ])
     .first();
@@ -12,5 +13,5 @@ const filterTimeDisposal = async (categoria) => {
 }
 
 module.exports = {
-  filterTimeDisposal,
+  CategoryFilter
 }

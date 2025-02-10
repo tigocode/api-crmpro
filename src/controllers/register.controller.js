@@ -1,5 +1,6 @@
-const { data_recompra } = require('../validations/formatDate');
-const { filterTimeDisposal } = require('../services/categoryFilter');
+const { calculateDuration } = require('../core/boxDuratiion');
+const { createRegister } = require('../services/createRegister');
+const { createGraduation } = require('../services/createGraduation');
 
 module.exports = {
   async Create(req, res) {
@@ -7,13 +8,25 @@ module.exports = {
       const {
         produto,
         categoria,
+        graduation,
+        quantidade,
         id_client,
         id_user
       } = req.body;
 
-      const tempo_descarte = await filterTimeDisposal(categoria);
+      const data_recompra = await calculateDuration(categoria, quantidade);
 
-      res.status(200).json(tempo_descarte);
+      const id_register = await createRegister(
+        produto,
+        categoria,
+        quantidade,
+        data_recompra,
+        id_client,
+        id_user
+      );      
+      await createGraduation(id_register, graduation);
+
+      res.status(200).json(id_register);
 
     } catch (error) {
       console.log(error);

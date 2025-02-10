@@ -1,11 +1,14 @@
-const date = new Date();
+const formatDate = (timeTotal) => {
+  const date = new Date();
+  date.setDate(date.getDate() + timeTotal);
 
-const data = date.toISOString().slice(0, 10); // 2021-09-01
-const hora = date.toTimeString().split(' ')[0]; // 20:00:00
+  const data = date.toISOString().slice(0, 10); // 2021-09-01
+  const hora = date.toTimeString().split(' ')[0]; // 20:00:00
 
-const data_recompra = `${data} ${hora}`;
+  return `${data} ${hora}`;
+}
 
 
 module.exports = {
-  data_recompra,
+  formatDate,
 }
