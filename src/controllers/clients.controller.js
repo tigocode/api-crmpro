@@ -24,7 +24,7 @@ module.exports = {
           telefone,
           id_user
         );
-        return res.status(201).json({resultInsert});
+        return res.status(201).json(resultInsert);
       } else {
         res.status(400).send({ message: dadosCheck.message });
       }
