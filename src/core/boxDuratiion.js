@@ -11,7 +11,7 @@ const calculateDuration = async (categoria, quantidade) => {
 
   if(quantidade > 2) {
     quantidade = quantidade / 2;
-    //timeTotal = timeTotal * quantidade
+   
     dateFormat = formatDate(timeTotal * quantidade);
     return dateFormat;
   } else {
