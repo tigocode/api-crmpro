@@ -7,14 +7,15 @@ const registerUser = async (nome, telefone, email, user, password) => {
   password = JWT_SECRET;
   const token = GeneratorToken(user, JWT_SECRET);
 
-  const createUser = await connection('users').insert({
-    nome,
-    telefone,
-    email,
-    user,
-    password,
-    token,
-  });
+  const createUser = await connection('users')
+    .insert({
+      nome,
+      telefone,
+      email,
+      user,
+      password,
+      token,
+    });
 
   return createUser;
 }

@@ -11,7 +11,10 @@ const register = require('../controllers/register.controller');
 router.post('/users', users.Create);
 router.post('/login', auth.Create);
 router.post('/home', home.Index);
+
 router.post('/clients', clients.Create);
+router.get('/clients/:user_id', clients.Index);
+
 router.post('/products', products.Create);
 router.post('/register', register.Create);
 

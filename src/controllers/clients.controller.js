@@ -1,8 +1,27 @@
 const { registerClient } = require('../services/createClient');
+const { selectClients } = require('../services/selectClients');
 const { checkDados } = require('../validations/attributes');
 const { UserAlreadyExist } = require('../validations/userAlreadyExist');
 
 module.exports = {
+  async Index(req, res) {
+    try {
+      const id = req.params.user_id;
+
+      const result = await selectClients(id);
+      
+      if(result.length === 0) {
+        return res.status(404).json({ message: 'Nenhum cliente encontrado.' });
+      }
+      return res.status(200).json(result);
+    } catch (error) {
+      console.log(error);
+      return {
+        error: 'Ocorreu um erro ao buscar os dados.'
+      };
+    }
+  },
+
   async Create(req, res) {
     try {
       const { 
