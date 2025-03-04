@@ -1,7 +1,26 @@
 const { registerProduct } = require('../services/createProduct');
+const { selectProducts } = require('../services/selectProducts');
 const { UserAlreadyExist } = require('../validations/userAlreadyExist');
 
 module.exports = {
+  async Index(req, res) {
+    try {
+      const id = req.params.user_id;
+      const result = await selectProducts(id);
+
+      if(result.length === 0) {
+        return res.status(404).json({ message: 'Nenhum produto encontrado.' });
+      }
+
+      return res.status(200).json(result);
+    } catch (error) {
+      console.log(error);
+      return {
+        error: 'Ocorreu um erro ao buscar os dados.'
+      };      
+    }
+  },
+
   async Create(req, res) {
     try {
       const {
