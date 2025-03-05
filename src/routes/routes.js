@@ -17,6 +17,8 @@ router.get('/clients/:user_id', clients.Index);
 
 router.post('/products', products.Create);
 router.get('/products/:user_id', products.Index);
+
 router.post('/register', register.Create);
+router.get('/register/:user_id', register.Index);
 
 module.exports = router;

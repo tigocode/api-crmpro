@@ -1,8 +1,25 @@
 const { calculateDuration } = require('../core/boxDuratiion');
+const { selectRegister } = require('../services/selectRegister');
 const { createRegister } = require('../services/createRegister');
 const { createGraduation } = require('../services/createGraduation');
 
 module.exports = {
+  async Index(req, res) {
+    try {
+      const id = req.params.user_id;
+
+      const result = await selectRegister(id);
+
+      return res.status(200).json(result);
+      
+    } catch (error) {
+      console.log(error);
+      return {
+        error: 'Ocorreu um erro ao buscar os dados.'
+      };
+    }
+  },
+
   async Create(req, res) {
     try {
       const {
