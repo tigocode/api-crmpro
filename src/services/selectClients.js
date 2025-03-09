@@ -10,6 +10,16 @@ const selectClients = async (id) => {
   return clientsSelected;
 }
 
+const selectAllClients = async () => {
+  const allClientsSelected = await connection('clients')
+    .select([
+      'clients.*'
+    ]);
+
+  return allClientsSelected;
+}
+
 module.exports = {
   selectClients,
+  selectAllClients
 }

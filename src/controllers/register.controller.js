@@ -1,5 +1,5 @@
 const { calculateDuration } = require('../core/boxDuratiion');
-const { selectRegister } = require('../services/selectRegister');
+const { selectRegister, selectAllRegister } = require('../services/selectRegister');
 const { createRegister } = require('../services/createRegister');
 const { createGraduation } = require('../services/createGraduation');
 
@@ -8,8 +8,12 @@ module.exports = {
     try {
       const id = req.params.user_id;
 
-      const result = await selectRegister(id);
+      const result = id ? await selectRegister(id) : await selectAllRegister();
 
+      if(result.length === 0) {
+        return res.status(404).json({ message: 'Nenhum registro encontrado.' });
+      }
+      
       return res.status(200).json(result);
       
     } catch (error) {

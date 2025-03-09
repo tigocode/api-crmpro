@@ -1,5 +1,5 @@
 const { registerClient } = require('../services/createClient');
-const { selectClients } = require('../services/selectClients');
+const { selectClients, selectAllClients } = require('../services/selectClients');
 const { checkDados } = require('../validations/attributes');
 const { UserAlreadyExist } = require('../validations/userAlreadyExist');
 
@@ -8,7 +8,7 @@ module.exports = {
     try {
       const id = req.params.user_id;
 
-      const result = await selectClients(id);
+      const result = id ?  await selectClients(id) : await selectAllClients();
       
       if(result.length === 0) {
         return res.status(404).json({ message: 'Nenhum cliente encontrado.' });

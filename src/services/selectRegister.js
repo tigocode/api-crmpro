@@ -12,6 +12,18 @@ const selectRegister = async (id) => {
     return registerSelected;
 }
 
+const selectAllRegister = async () => {
+  const allRegisterSelected = await connection('register')
+    .join('graduation', 'register.id', '=', 'graduation.id_register')
+    .select([
+      'register.*',
+      'graduation.*'
+    ]);
+
+    return allRegisterSelected;
+}
+
 module.exports = {
   selectRegister,
+  selectAllRegister
 }

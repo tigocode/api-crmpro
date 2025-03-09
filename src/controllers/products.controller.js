@@ -1,12 +1,12 @@
 const { registerProduct } = require('../services/createProduct');
-const { selectProducts } = require('../services/selectProducts');
+const { selectProducts, selectAllProducts } = require('../services/selectProducts');
 const { UserAlreadyExist } = require('../validations/userAlreadyExist');
 
 module.exports = {
   async Index(req, res) {
     try {
       const id = req.params.user_id;
-      const result = await selectProducts(id);
+      const result = id ? await selectProducts(id) : await selectAllProducts();
 
       if(result.length === 0) {
         return res.status(404).json({ message: 'Nenhum produto encontrado.' });

@@ -10,6 +10,16 @@ const selectProducts = async (id) => {
     return productsSelected;
 }
 
+const selectAllProducts = async () => {
+  const allProductsSelected = await connection('products')
+    .select([
+      'products.*'
+    ]);
+
+    return allProductsSelected;
+}
+
 module.exports = {
   selectProducts,
+  selectAllProducts
 }
