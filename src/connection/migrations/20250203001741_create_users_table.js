@@ -11,6 +11,7 @@ exports.up = function(knex) {
     table.string('user').notNullable();
     table.string('password').notNullable();
     table.string('token').notNullable();
+    table.boolean('user_active').defaultTo(true);
     table.timestamp('createdAt').defaultTo(knex.fn.now())
   });
 };
