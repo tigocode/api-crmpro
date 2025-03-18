@@ -1,5 +1,7 @@
 const { registerUser } = require('../services/createUser');
 const { checkDados } = require('../validations/attributes');
+const { changeUser } = require('../services/changeUser');
+const { UserAlreadyExist } = require('../validations/userAlreadyExist');
 
 module.exports = {
   async Create(req, res) {
@@ -32,5 +34,46 @@ module.exports = {
       error: 'Ocorreu um erro ao inserir os dados.'
     });
    }
+  },
+  
+  async Update(req, res) {
+    try {
+      const {       
+        nome,
+        telefone,
+        email,
+        user,
+        password,
+        user_active
+      } = req.body;
+
+      const id = parseInt(req.params.user_id);
+
+      const checkId = await UserAlreadyExist(id);
+      const dadosCheck = checkDados(nome, email, telefone);
+
+      if(checkId.status && dadosCheck.status) {
+        const updateUserId = await changeUser(
+          id,
+          nome,
+          telefone,
+          email,
+          user,
+          password,
+          user_active
+        );
+        return res.status(201).send({
+          updateUserId
+        });
+      } else {
+        res.status(404).send({ message: 'Usuário não encontrado.' });
+      }
+
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        error: 'Ocorreu um erro ao atualizar os dados.'
+      });
+    }
   }
 };

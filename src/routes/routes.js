@@ -9,6 +9,8 @@ const products = require('../controllers/products.controller');
 const register = require('../controllers/register.controller');
 
 router.post('/users', users.Create);
+router.post('/users/:user_id', users.Update);
+
 router.post('/login', auth.Create);
 router.post('/home', home.Index);
 
