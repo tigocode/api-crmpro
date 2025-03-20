@@ -9,7 +9,7 @@ const products = require('../controllers/products.controller');
 const register = require('../controllers/register.controller');
 
 router.post('/users', users.Create);
-router.post('/users/:user_id', users.Update);
+router.patch('/users/:user_id', users.Update);
 
 router.post('/login', auth.Create);
 router.post('/home', home.Index);
@@ -17,6 +17,7 @@ router.post('/home', home.Index);
 router.post('/clients', clients.Create);
 router.get('/clients', clients.Index);
 router.get('/clients/:user_id', clients.Index);
+router.patch('/clients/:user_id', clients.Update);
 
 router.post('/products', products.Create);
 router.get('/products', products.Index);

@@ -53,5 +53,16 @@ module.exports = {
         error: 'Ocorreu um erro ao inserir os dados.'
       });
     }
+  },
+
+  async Update(req, res) {
+    try {
+      
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        error: 'Ocorreu um erro ao atualizar os dados.'
+      });
+    }
   }
 }

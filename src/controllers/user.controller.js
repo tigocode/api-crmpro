@@ -41,26 +41,19 @@ module.exports = {
       const {       
         nome,
         telefone,
-        email,
-        user,
-        password,
-        user_active
+        email
       } = req.body;
 
       const id = parseInt(req.params.user_id);
 
       const checkId = await UserAlreadyExist(id);
-      const dadosCheck = checkDados(nome, email, telefone);
 
-      if(checkId.status && dadosCheck.status) {
+      if(checkId.status) {
         const updateUserId = await changeUser(
           id,
           nome,
           telefone,
-          email,
-          user,
-          password,
-          user_active
+          email
         );
         return res.status(201).send({
           updateUserId
