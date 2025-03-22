@@ -12,6 +12,8 @@ router.post('/users', users.Create);
 router.patch('/users/:user_id', users.Update);
 
 router.post('/login', auth.Create);
+router.patch('/changePassword', auth.Update);
+
 router.post('/home', home.Index);
 
 router.post('/clients', clients.Create);
