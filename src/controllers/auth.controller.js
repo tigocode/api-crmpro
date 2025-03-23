@@ -10,7 +10,7 @@ module.exports = {
 
       const userLocated = await searchUser(user, password);
 
-      return res.status(200).send({ userLocated });
+      return res.status(200).send( userLocated );
     } catch (error) {
       console.log(error);
       return res.status(500).send({

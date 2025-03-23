@@ -1,10 +1,10 @@
 const connection = require('../connection/connection');
 
-const UserAlreadyExist = async (id) => {
+const ClientAlreadyExist = async (id) => {
   let status;
   let code;
 
-  const searchId = await connection('users')
+  const searchId = await connection('clients')
     .where('id', id)
     .select('id')
     .first();
@@ -24,5 +24,5 @@ const UserAlreadyExist = async (id) => {
 }
 
 module.exports = {
-  UserAlreadyExist
+  ClientAlreadyExist
 }

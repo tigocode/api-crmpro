@@ -19,7 +19,7 @@ router.post('/home', home.Index);
 router.post('/clients', clients.Create);
 router.get('/clients', clients.Index);
 router.get('/clients/:user_id', clients.Index);
-router.patch('/clients/:user_id', clients.Update);
+router.patch('/clients/:client_id', clients.Update);
 
 router.post('/products', products.Create);
 router.get('/products', products.Index);

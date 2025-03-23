@@ -1,7 +1,9 @@
 const { registerClient } = require('../services/createClient');
 const { selectClients, selectAllClients } = require('../services/selectClients');
 const { checkDados } = require('../validations/attributes');
+const { changeClient } = require('../services/changeClient');
 const { UserAlreadyExist } = require('../validations/userAlreadyExist');
+const { ClientAlreadyExist } = require('../validations/clientAlreadyExist'  );
 
 module.exports = {
   async Index(req, res) {
@@ -57,7 +59,35 @@ module.exports = {
 
   async Update(req, res) {
     try {
+      const {
+        nome,
+        email,
+        telefone,
+        id_user
+      } = req.body;
+
+      const id = parseInt(req.params.client_id);
+      const checkId = await ClientAlreadyExist(id);
       
+      if(checkId.status) {
+        const updateClientId = await changeClient(
+          id,
+          nome,
+          email,
+          telefone,
+          id_user
+        );
+
+        if(updateClientId === 0) {
+          res.status(403).send({ message: 'Acesso negado. Você não tem permissão para esta ação.' });
+        } else {
+          return res.status(201).send({
+            updateClientId
+          });
+        }
+       }else {
+        res.status(404).send({ message: 'Cliente não encontrado.' });
+      }
     } catch (error) {
       console.log(error);
       return res.status(500).send({

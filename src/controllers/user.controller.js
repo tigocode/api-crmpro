@@ -38,17 +38,18 @@ module.exports = {
   
   async Update(req, res) {
     try {
-      const {       
+      const {
         nome,
         telefone,
         email
       } = req.body;
 
       const id = parseInt(req.params.user_id);
-
+      // Check if the user exists
       const checkId = await UserAlreadyExist(id);
-
+      // If the user exists, update the data
       if(checkId.status) {
+        // Update the user data
         const updateUserId = await changeUser(
           id,
           nome,
