@@ -13,6 +13,7 @@ exports.up = function(knex) {
     table.string('token').notNullable();
     table.boolean('user_active').defaultTo(true);
     table.timestamp('createdAt').defaultTo(knex.fn.now())
+    table.timestamp('updatedAt').notNullable();
   });
 };
 
