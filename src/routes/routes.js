@@ -24,6 +24,7 @@ router.patch('/clients/:client_id', clients.Update);
 router.post('/products', products.Create);
 router.get('/products', products.Index);
 router.get('/products/:user_id', products.Index);
+router.patch('/products/:product_id', products.Update);
 
 router.post('/register', register.Create);
 router.get('/register', register.Index);

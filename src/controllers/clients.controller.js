@@ -85,7 +85,7 @@ module.exports = {
             updateClientId
           });
         }
-       }else {
+       } else {
         res.status(404).send({ message: 'Cliente não encontrado.' });
       }
     } catch (error) {

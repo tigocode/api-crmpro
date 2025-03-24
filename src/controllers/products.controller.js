@@ -1,6 +1,8 @@
 const { registerProduct } = require('../services/createProduct');
 const { selectProducts, selectAllProducts } = require('../services/selectProducts');
+const { changeProduct } = require('../services/changeProduct');
 const { UserAlreadyExist } = require('../validations/userAlreadyExist');
+const { ProductAlreadyExist } = require('../validations/productAlreadyExist');
 
 module.exports = {
   async Index(req, res) {
@@ -53,6 +55,52 @@ module.exports = {
       console.log(error);
       return res.status(400).send({
         error: 'Ocorreu um erro ao inserir os dados.'
+      });
+    }
+  },
+
+  async Update(req, res) {
+    try {
+      const {
+        modelo,
+        fabricante,
+        categoria,
+        valor_unitario,
+        valor_revenda,
+        id_user
+      } = req.body;
+  
+      const id = parseInt(req.params.product_id);
+  
+      const checkId =  await ProductAlreadyExist(id);
+  
+      if(checkId.status) {
+        const updateProductId = await changeProduct(
+          id,
+          modelo,
+          fabricante,
+          categoria,
+          valor_unitario,
+          valor_revenda,
+          id_user
+        );
+
+        if(updateProductId === 0) {
+          return res.status(403).send({
+            message: 'Acesso negado. Você não tem permissão para esta ação.'
+          });
+        } else {
+          return res.status(201).send({
+            updateProductId
+          });
+        }
+      } else {
+        res.status(404).send({ message: 'Produto não encontrado.' });
+      }
+    } catch (error) {
+      console.log(error);
+      return res.status(400).send({
+        error: 'Ocorreu um erro ao atualizar os dados.'
       });
     }
   }
