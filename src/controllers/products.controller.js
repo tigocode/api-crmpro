@@ -3,6 +3,7 @@ const { selectProducts, selectAllProducts } = require('../services/selectProduct
 const { changeProduct } = require('../services/changeProduct');
 const { UserAlreadyExist } = require('../validations/userAlreadyExist');
 const { ProductAlreadyExist } = require('../validations/productAlreadyExist');
+const { formatDate } = require('../validations/formatDate');
 
 module.exports = {
   async Index(req, res) {
@@ -70,9 +71,9 @@ module.exports = {
         id_user
       } = req.body;
   
-      const id = parseInt(req.params.product_id);
-  
+      const id = parseInt(req.params.product_id);  
       const checkId =  await ProductAlreadyExist(id);
+      const updatedAt = await formatDate();
   
       if(checkId.status) {
         const updateProductId = await changeProduct(
@@ -82,6 +83,7 @@ module.exports = {
           categoria,
           valor_unitario,
           valor_revenda,
+          updatedAt,
           id_user
         );
 

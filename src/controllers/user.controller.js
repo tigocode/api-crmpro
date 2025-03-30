@@ -2,6 +2,7 @@ const { registerUser } = require('../services/createUser');
 const { checkDados } = require('../validations/attributes');
 const { changeUser } = require('../services/changeUser');
 const { UserAlreadyExist } = require('../validations/userAlreadyExist');
+const { formatDate } = require('../validations/formatDate');
 
 module.exports = {
   async Create(req, res) {
@@ -44,6 +45,8 @@ module.exports = {
         email
       } = req.body;
 
+      const updatedAt = await formatDate();
+      // Check if the user exists
       const id = parseInt(req.params.user_id);
       // Check if the user exists
       const checkId = await UserAlreadyExist(id);
@@ -54,7 +57,8 @@ module.exports = {
           id,
           nome,
           telefone,
-          email
+          email,
+          updatedAt
         );
         return res.status(201).send({
           updateUserId

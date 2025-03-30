@@ -1,6 +1,6 @@
 const formatDate = (timeTotal) => {
   const date = new Date();
-  if(timeTotal !== 'undefined') {
+  if(timeTotal) {
     date.setDate(date.getDate() + timeTotal);
 
     const data = date.toISOString().slice(0, 10); // 2021-09-01

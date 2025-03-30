@@ -3,7 +3,8 @@ const { selectClients, selectAllClients } = require('../services/selectClients')
 const { checkDados } = require('../validations/attributes');
 const { changeClient } = require('../services/changeClient');
 const { UserAlreadyExist } = require('../validations/userAlreadyExist');
-const { ClientAlreadyExist } = require('../validations/clientAlreadyExist'  );
+const { ClientAlreadyExist } = require('../validations/clientAlreadyExist');
+const { formatDate } = require('../validations/formatDate');
 
 module.exports = {
   async Index(req, res) {
@@ -68,6 +69,7 @@ module.exports = {
 
       const id = parseInt(req.params.client_id);
       const checkId = await ClientAlreadyExist(id);
+      const updatedAt = await formatDate();
       
       if(checkId.status) {
         const updateClientId = await changeClient(
@@ -75,6 +77,7 @@ module.exports = {
           nome,
           email,
           telefone,
+          updatedAt,
           id_user
         );
 

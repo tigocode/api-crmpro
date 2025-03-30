@@ -1,12 +1,13 @@
 const connection = require('../connection/connection');
 
-const changeUser = async (id, nome, telefone, email) => {
+const changeUser = async (id, nome, telefone, email, updatedAt) => {
   const userChange = await connection('users')
     .where('id', id)
     .update({
       nome,
       telefone,
-      email
+      email,
+      updatedAt
     });
 
   return userChange;
