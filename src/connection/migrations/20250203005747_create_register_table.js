@@ -10,6 +10,9 @@ exports.up = function(knex) {
     table.string('quantidade').notNullable();
     table.timestamp('data_compra').defaultTo(knex.fn.now())
     table.timestamp('data_recompra').notNullable();
+    table.boolean('is_repurchase').defaultTo(false);
+    table.boolean('is_alert_sent').defaultTo(false);
+    table.string('alert_count').notNullable();
 
     table.integer('id_client').unsigned().notNullable();
     table.foreign('id_client').references('id').inTable('clients').onDelete('CASCADE');
