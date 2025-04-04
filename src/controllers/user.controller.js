@@ -3,6 +3,8 @@ const { checkDados } = require('../validations/attributes');
 const { changeUser } = require('../services/changeUser');
 const { UserAlreadyExist } = require('../validations/userAlreadyExist');
 const { formatDate } = require('../validations/formatDate');
+const { freeTime } = require('../validations/freeTime');
+const { createFreeTime } = require('../services/createFreeTime');
 
 module.exports = {
   async Create(req, res) {
@@ -25,6 +27,10 @@ module.exports = {
         user,
         password
       );
+      
+      const { start, end } = freeTime();
+      createFreeTime(resultInsert, start, end);
+
       return res.status(201).send(resultInsert);
     } else {
       res.status(400).send({ message: dadosCheck.message });
