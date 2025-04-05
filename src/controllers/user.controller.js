@@ -38,7 +38,10 @@ module.exports = {
    } catch (error) {
     console.log(error);
     return res.status(500).send({
-      error: 'Ocorreu um erro ao inserir os dados.'
+      error: {
+        message: 'Ocorreu um erro ao inserir os dados.',
+        log: error
+      }
     });
    }
   },
