@@ -1,12 +1,6 @@
-const knex = require('knex')({
-  client: 'mysql2',
-  connection: {
-    host: 'localhost',
-    port: 3306,
-    user: 'admin_crm',
-    password: 'Senha@2580',
-    database: 'crmpro',
-  },
-});
+const knex = require('knex');
+const configuration = require('../../knexfile');
 
-module.exports = knex;
+const connection = knex(configuration.development);
+
+module.exports = connection;
