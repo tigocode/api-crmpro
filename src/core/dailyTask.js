@@ -1,13 +1,14 @@
 const cron = require('node-cron');
+const { selectRemaingTime } = require('../services/changeFreeTime');
 
-const taskDaily = () => {
-  console.log('Executando tarefa diária às 16:04');
-  // Aqui entra sua lógica de negócio, banco, envio de e-mail, etc.
+const taskDaily = async () => {
+  // Rotina automatizada que chama a função startRoutine (Rotina diária).
+  await selectRemaingTime();
 }
 
 const startRoutine = () => {
-  // Executa todos os dias às 15:30
-  cron.schedule('04 16 * * *', taskDaily);
+  // Executa todos os dias às 01:01 da manhã
+  cron.schedule('01 1 * * *', taskDaily);
 }
 
 module.exports = {
