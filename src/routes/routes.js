@@ -7,9 +7,12 @@ const home = require('../controllers/home.controller');
 const clients = require('../controllers/clients.controller');
 const products = require('../controllers/products.controller');
 const register = require('../controllers/register.controller');
+const license = require('../controllers/license.controller');
 
 router.post('/users', users.Create);
 router.patch('/users/:user_id', users.Update);
+
+router.post('/license', license.Create);
 
 router.post('/login', auth.Create);
 router.patch('/changePassword', auth.Update);

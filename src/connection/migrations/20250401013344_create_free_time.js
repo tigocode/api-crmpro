@@ -9,8 +9,8 @@ exports.up = function(knex) {
     table.timestamp('start_time').notNullable();
     table.timestamp('end_time').notNullable();
     table.string('remaining_time').notNullable();
-    table.boolean('first_license').defaultTo(true);
-    table.boolean('updated_license').defaultTo(false);
+    table.boolean('first_license').notNullable();
+    table.boolean('updated_license').notNullable();
 
     table.foreign('id_user').references('id').inTable('users').onDelete('CASCADE');
   })

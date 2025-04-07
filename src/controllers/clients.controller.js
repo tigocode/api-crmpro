@@ -2,8 +2,7 @@ const { registerClient } = require('../services/createClient');
 const { selectClients, selectAllClients } = require('../services/selectClients');
 const { checkDados } = require('../validations/attributes');
 const { changeClient } = require('../services/changeClient');
-const { UserAlreadyExist } = require('../validations/userAlreadyExist');
-const { ClientAlreadyExist } = require('../validations/clientAlreadyExist');
+const { UserAlreadyExist, ClientAlreadyExist } = require('../validations/alreadyExist');
 const { formatDate } = require('../validations/formatDate');
 
 module.exports = {

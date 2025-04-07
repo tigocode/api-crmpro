@@ -1,7 +1,7 @@
 const { registerUser } = require('../services/createUser');
 const { checkDados } = require('../validations/attributes');
 const { changeUser } = require('../services/changeUser');
-const { UserAlreadyExist } = require('../validations/userAlreadyExist');
+const { UserAlreadyExist, UserLicenseAlreadyExist } = require('../validations/alreadyExist');
 const { formatDate } = require('../validations/formatDate');
 const { freeTime } = require('../validations/freeTime');
 const { createFreeTime } = require('../services/createFreeTime');
@@ -28,7 +28,11 @@ module.exports = {
         password
       );
       
-      const { start, end } = freeTime();
+      const id_user = resultInsert[0];
+      // Check if the user exists
+      const checkId = await UserLicenseAlreadyExist(id_user);
+
+      const { start, end } = freeTime(checkId);
       createFreeTime(resultInsert, start, end);
 
       return res.status(201).send(resultInsert);
@@ -79,7 +83,10 @@ module.exports = {
     } catch (error) {
       console.log(error);
       return res.status(500).send({
-        error: 'Ocorreu um erro ao atualizar os dados.'
+        error: {
+          message: 'Ocorreu um erro ao inserir os dados.',
+          log: error
+        }
       });
     }
   }

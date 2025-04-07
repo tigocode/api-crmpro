@@ -1,8 +1,7 @@
 const { registerProduct } = require('../services/createProduct');
 const { selectProducts, selectAllProducts } = require('../services/selectProducts');
 const { changeProduct } = require('../services/changeProduct');
-const { UserAlreadyExist } = require('../validations/userAlreadyExist');
-const { ProductAlreadyExist } = require('../validations/productAlreadyExist');
+const { UserAlreadyExist, ProductAlreadyExist } = require('../validations/alreadyExist');
 const { formatDate } = require('../validations/formatDate');
 
 module.exports = {
