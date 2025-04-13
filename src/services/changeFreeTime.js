@@ -1,7 +1,7 @@
 const connection = require('../connection/connection');
 const { substractedDay } = require('../core/subtractedDay');
 
-const selectRemaingTime = async () => {
+const selectFirstLicense = async () => {
   const remainingTimeList = await connection('free_time')
     .where('first_license', '=', 1)
     .select([
@@ -11,8 +11,21 @@ const selectRemaingTime = async () => {
   return remainingTimeList;
 }
 
+const selectUpdatedLicense = async () => {
+  const remainingTimeList = await connection('free_time')
+    .where('updated_license', '=', 1)
+    .select([
+      'free_time.*'
+    ]);
+
+  return remainingTimeList;
+}
+
 async function updateRemainingTime() {
-  const remainingTimeList = await selectRemaingTime();
+  const firstList = await selectFirstLicense();
+  const updatedList = await selectUpdatedLicense();
+  // Juntando os dois arrays
+  const remainingTimeList = [...firstList, ...updatedList];
   // chamando a função selectRemaingTime
   const newRemainingTime = await substractedDay(remainingTimeList);
   // chamando a rotina subtractDay
@@ -27,14 +40,19 @@ async function updateRemainingTime() {
 };
 
 async function updateStatusFristLicense() {
-  const remainingTimeList = await selectRemaingTime();
+  const firstList = await selectFirstLicense();
+  const updatedList = await selectUpdatedLicense();
+  // Juntando os dois arrays
+  const remainingTimeList = [...firstList, ...updatedList];
   // chamando a função selectRemaingTime
+
   await Promise.all(remainingTimeList.map(async (item) => {
     await connection('free_time')
       .where('id', item.id)
       .where('remaining_time', '=', '0')
       .update({
         first_license: 0,
+        updated_license: 0,
       });
   }));
 };
@@ -43,7 +61,6 @@ async function updateStatusFristLicense() {
 async function executarRotina() {
   await updateRemainingTime();
   await updateStatusFristLicense();
-  console.log('Rotina executada com sucesso!');
 }
 
 module.exports = {
