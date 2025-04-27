@@ -47,12 +47,15 @@ module.exports = {
         );
         return res.status(201).json(resultInsert);
       } else {
-        res.status(400).send({ message: dadosCheck.message });
+        res.status(400).send({ message: 'User não existe.' });
       }
     } catch (error) {
       console.log(error);
       return res.status(400).send({
-        error: 'Ocorreu um erro ao inserir os dados.'
+        error: {
+          message: 'Ocorreu um erro ao inserir os dados.',
+          log: error
+        }
       });
     }
   },

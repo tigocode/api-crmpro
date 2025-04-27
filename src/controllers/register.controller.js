@@ -2,6 +2,7 @@ const { calculateDuration } = require('../core/boxDuratiion');
 const { selectRegister, selectAllRegister } = require('../services/selectRegister');
 const { createRegister } = require('../services/createRegister');
 const { createGraduation } = require('../services/createGraduation');
+const { alreadyPurchasedExists } =  require('../validations/alreadyPurchasedExists');
 
 module.exports = {
   async Index(req, res) {
@@ -35,6 +36,8 @@ module.exports = {
         id_user
       } = req.body;
 
+      const is_repurchase = await alreadyPurchasedExists(id_user, id_client);
+
       const data_recompra = await calculateDuration(categoria, quantidade);
 
       const id_register = await createRegister(
@@ -42,6 +45,7 @@ module.exports = {
         categoria,
         quantidade,
         data_recompra,
+        is_repurchase,
         id_client,
         id_user
       );      

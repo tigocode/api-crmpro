@@ -4,7 +4,7 @@ const ValidationSearchId = (searchId, id) => {
   let status;
   let code;
 
-  if (searchId && searchId.id_user === id) {
+  if (searchId && (searchId.id === id || searchId.id_user === id)) {
     status = true;
     code = 201;
   } else {
