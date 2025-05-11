@@ -1,14 +1,17 @@
 const cron = require('node-cron');
 const { executarRotina } = require('../services/changeFreeTime');
+const { calculateNextAlert } = require('../core/sendAlert');
 
 const taskDaily = async () => {
   // Rotina automatizada que chama a função startRoutine (Rotina diária).
   await executarRotina();
+  const result =  await calculateNextAlert();
+  console.log('Resultado da rotina diária:', result);
 }
 
 const startRoutine = () => {
   // Executa todos os dias às 01:01 da manhã
-  cron.schedule('42 22 * * *', taskDaily);
+  cron.schedule('38 23 * * *', taskDaily);
 }
 
 module.exports = {
