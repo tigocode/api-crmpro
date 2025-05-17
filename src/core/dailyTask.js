@@ -11,7 +11,7 @@ const taskDaily = async () => {
 
 const startRoutine = () => {
   // Executa todos os dias às 01:01 da manhã
-  cron.schedule('38 23 * * *', taskDaily);
+  cron.schedule('59 11 * * *', taskDaily);
 }
 
 module.exports = {

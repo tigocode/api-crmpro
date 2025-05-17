@@ -28,7 +28,7 @@ const calculateNextAlert = async () => {
     }
   });
   
-  return nextAlert.filter((item) => item.diasRestantes <= 30);
+  return nextAlert.filter((item) => item.diasRestantes >= 0 && item.diasRestantes <= 15);
 }
 
 module.exports = {
